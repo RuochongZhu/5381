@@ -1,0 +1,78 @@
+BASIC FUNCTION CALLING DEMO
+
+Function definition:
+def calculate_priority_score(impact: int, feasibility: int, urgency: int) -> str:
+    impact_value = _coerce_rating(impact)
+    feasibility_value = _coerce_rating(feasibility)
+    urgency_value = _coerce_rating(urgency)
+
+    score = round((impact_value * 0.45) + (feasibility_value * 0.20) + (urgency_value * 0.35), 2)
+    if score >= 4.4:
+        label = "Immediate priority"
+    elif score >= 3.6:
+        label = "Strong candidate"
+    elif score >= 2.8:
+        label = "Secondary candidate"
+    else:
+        label = "Low priority"
+
+    return json.dumps(
+        {
+            "impact": impact_value,
+            "feasibility": feasibility_value,
+            "urgency": urgency_value,
+            "weighted_score": score,
+            "label": label,
+        },
+        indent=2,
+    )
+
+Tool metadata:
+{
+  "type": "function",
+  "function": {
+    "name": "calculate_priority_score",
+    "description": "Calculate a weighted priority score from impact, feasibility, and urgency values on a 1-5 scale.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "impact": {
+          "type": "integer",
+          "description": "Expected community impact on a 1-5 scale."
+        },
+        "feasibility": {
+          "type": "integer",
+          "description": "Implementation feasibility on a 1-5 scale."
+        },
+        "urgency": {
+          "type": "integer",
+          "description": "Urgency on a 1-5 scale."
+        }
+      },
+      "required": [
+        "impact",
+        "feasibility",
+        "urgency"
+      ]
+    }
+  }
+}
+
+Prompt:
+Evaluate a flood barrier project with impact 5, feasibility 4, and urgency 5. Use the tool first, then explain whether it should be funded soon.
+
+Tool events:
+[
+  {
+    "name": "calculate_priority_score",
+    "arguments": {
+      "feasibility": 4,
+      "urgency": 5,
+      "impact": 5
+    },
+    "output": "{\n  \"impact\": 5,\n  \"feasibility\": 4,\n  \"urgency\": 5,\n  \"weighted_score\": 4.8,\n  \"label\": \"Immediate priority\"\n}"
+  }
+]
+
+Final response:
+The flood barrier project has a weighted score of 4.8 out of 5, which is considered an immediate priority. Given its high impact and urgency, it should be funded soon to mitigate potential risks effectively.

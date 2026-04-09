@@ -1,0 +1,75 @@
+MCP TEST
+
+Server: recovery-assistant-mcp v0.1.0
+
+Available tools:
+{
+  "tools": [
+    {
+      "name": "search_recovery_projects",
+      "description": "Search the local recovery project dataset for community planning ideas.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Keywords describing the need or project type."
+          },
+          "community": {
+            "type": "string",
+            "description": "Optional exact community filter."
+          },
+          "sector": {
+            "type": "string",
+            "description": "Optional exact sector filter."
+          },
+          "top_n": {
+            "type": "integer",
+            "description": "Maximum number of records to return."
+          }
+        },
+        "required": [
+          "query"
+        ]
+      }
+    },
+    {
+      "name": "summarize_sector_counts",
+      "description": "Count how many recovery projects appear in each sector, optionally within one community.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "community": {
+            "type": "string",
+            "description": "Optional exact community filter."
+          }
+        },
+        "required": []
+      }
+    }
+  ]
+}
+
+Direct tool call result:
+[
+  {
+    "community": "Red Hook",
+    "project_title": "Neighborhood Microgrid for Public Housing",
+    "sector": "Energy",
+    "issue": "Residents lose heat, elevators, and refrigeration during outages.",
+    "action": "Install a neighborhood microgrid with solar, batteries, and backup connections for public housing buildings.",
+    "priority": "High",
+    "source_note": "Inspired by coastal recovery planning examples in the course materials.",
+    "score": 6
+  },
+  {
+    "community": "Red Hook",
+    "project_title": "Floodproof Community Center Shelter",
+    "sector": "Emergency Management",
+    "issue": "Shelter operations fail when ground-floor equipment floods.",
+    "action": "Elevate electrical systems and retrofit the community center so it can operate as a storm shelter.",
+    "priority": "High",
+    "source_note": "Inspired by neighborhood resilience hub concepts in the course materials.",
+    "score": 6
+  }
+]

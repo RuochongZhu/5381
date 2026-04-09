@@ -1,0 +1,36 @@
+PROMPT DESIGN MULTI-AGENT WORKFLOW
+
+Input table:
+| community       | project_title                    | sector             | issue                                                                                | action                                                                                   | priority   | source_note                                                           |
+|:----------------|:---------------------------------|:-------------------|:-------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------|:-----------|:----------------------------------------------------------------------|
+| Long Beach      | Dune and Boardwalk Reinforcement | Coastal Protection | Repeated storm surge damages oceanfront access and weakens shoreline protection.     | Expand dune restoration, reinforce the boardwalk, and add sand retention features.       | High       | Inspired by shoreline recovery strategies in the course materials.    |
+| Long Beach      | Transit Entrance Flood Barriers  | Transportation     | Rail and bus access is disrupted by surge water entering stations and access points. | Install removable flood barriers and pump upgrades at transit entrances.                 | Medium     | Inspired by transit resilience examples in the course materials.      |
+| Lower Manhattan | Subway Vent Flood Gates          | Transportation     | Underground transit assets flood through vents and stairways during major storms.    | Add deployable flood gates, raised vents, and monitoring sensors at key subway openings. | High       | Inspired by Lower Manhattan recovery planning themes.                 |
+| Broad Channel   | Emergency Ferry Staging Area     | Transportation     | Road access can be cut off during severe flooding.                                   | Designate and equip a ferry staging area for emergency passenger and supply transport.   | Medium     | Inspired by coastal access planning examples in the course materials. |
+
+Agent 1 output:
+- The Long Beach projects face differing priorities: Coastal Protection (High) and Transportation (Medium), which could indicate an imbalance in resource allocation.
+- Lower Manhattan's Subway Vent Flood Gates project is categorized as High priority, suggesting it may be a critical component of broader flood mitigation efforts for the area.
+- Broad Channel's Emergency Ferry Staging Area project has a Medium priority level, potentially indicating that while important, it might not be seen as an immediate or high-risk issue requiring urgent attention.
+
+Agent 2 output:
+Rank 1: The Coastal Protection project in Long Beach should be prioritized over Transportation due to its High priority status, which could signal potential resource imbalances.
+
+Rank 2: Lower Manhattan's Subway Vent Flood Gates project is ranked High, suggesting it may be a critical component of broader flood mitigation efforts for the area and warrants immediate attention.
+
+Rank 3: Broad Channel's Emergency Ferry Staging Area project has a Medium priority level, indicating that while important, it might not be seen as an urgent issue requiring immediate resources.
+
+Agent 3 output:
+### Public Update: Project Priorities Identified
+
+**Title:** Strategic Focus Shifts to High-Priority Projects
+
+Our strategic team has identified the following priorities for our projects based on their respective rankings:
+
+- **Coastal Protection in Long Beach**: This project holds a top priority due to its high ranking. Given this, we believe it may be essential to allocate additional resources and attention to ensure timely completion, as indicated by its critical status.
+
+- **Lower Manhattan Subway Vent Flood Gates Project**: Ranked as High, this initiative is crucial for flood mitigation efforts in the Lower Manhattan area. Immediate attention is warranted given its importance in safeguarding infrastructure against potential flooding threats.
+
+For projects with Medium priority levels, such as the Emergency Ferry Staging Area in Broad Channel, while important, they may not be seen as urgent issues requiring immediate resources at this time.
+
+We will continue to monitor these priorities and adjust our strategies accordingly.

@@ -1,0 +1,118 @@
+AGENT WRAPPER + TOOL DEMO
+
+Function definition:
+def search_recovery_projects(query: str, community: str = "", sector: str = "", top_n: int = 4) -> str:
+    df = load_projects().copy()
+
+    if community:
+        df = df[df["community"].str.lower() == community.lower()]
+    if sector:
+        df = df[df["sector"].str.lower() == sector.lower()]
+
+    if df.empty:
+        return json.dumps([], indent=2)
+
+    query_tokens = tokenize(query)
+
+    def score_row(row: pd.Series) -> int:
+        score = len(query_tokens & tokenize(_search_blob(row)))
+        if community and row["community"].lower() == community.lower():
+            score += 2
+        if sector and row["sector"].lower() == sector.lower():
+            score += 1
+        score += PRIORITY_ORDER.get(str(row["priority"]), 0)
+        return score
+
+    df["score"] = df.apply(score_row, axis=1)
+    df = df.sort_values(["score", "priority"], ascending=[False, False]).head(int(top_n))
+
+    records = []
+    for _, row in df.iterrows():
+        records.append(
+            {
+                "community": row["community"],
+                "project_title": row["project_title"],
+                "sector": row["sector"],
+                "issue": row["issue"],
+                "action": row["action"],
+                "priority": row["priority"],
+                "source_note": row["source_note"],
+                "score": int(row["score"]),
+            }
+        )
+    return json.dumps(records, indent=2)
+
+Tool metadata:
+{
+  "type": "function",
+  "function": {
+    "name": "search_recovery_projects",
+    "description": "Search the local recovery project dataset for projects relevant to a community problem or planning question.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "Keywords describing the problem, need, or project type to search for."
+        },
+        "community": {
+          "type": "string",
+          "description": "Optional exact community filter such as Red Hook or Long Beach."
+        },
+        "sector": {
+          "type": "string",
+          "description": "Optional exact sector filter such as Transportation or Public Health."
+        },
+        "top_n": {
+          "type": "integer",
+          "description": "Maximum number of matching projects to return.",
+          "default": 4
+        }
+      },
+      "required": [
+        "query"
+      ]
+    }
+  }
+}
+
+Prompt:
+Find projects for Red Hook related to flooding, shelter operations, and backup power. Return 3 bullets with the project title and why it matters.
+
+Tool events:
+[
+  {
+    "name": "search_recovery_projects",
+    "arguments": {
+      "query": "flooding",
+      "sector": "",
+      "community": "Red Hook",
+      "top_n": 3
+    },
+    "output": "[\n  {\n    \"community\": \"Red Hook\",\n    \"project_title\": \"Neighborhood Microgrid for Public Housing\",\n    \"sector\": \"Energy\",\n    \"issue\": \"Residents lose heat, elevators, and refrigeration during outages.\",\n    \"action\": \"Install a neighborhood microgrid with solar, batteries, and backup connections for public housing buildings.\",\n    \"priority\": \"High\",\n    \"source_note\": \"Inspired by coastal recovery planning examples in the course materials.\",\n    \"score\": 5\n  },\n  {\n    \"community\": \"Red Hook\",\n    \"project_title\": \"Floodproof Community Center Shelter\",\n    \"sector\": \"Emergency Management\",\n    \"issue\": \"Shelter operations fail when ground-floor equipment floods.\",\n    \"action\": \"Elevate electrical systems and retrofit the community center so it can operate as a storm shelter.\",\n    \"priority\": \"High\",\n    \"source_note\": \"Inspired by neighborhood resilience hub concepts in the course materials.\",\n    \"score\": 5\n  }\n]"
+  },
+  {
+    "name": "search_recovery_projects",
+    "arguments": {
+      "query": "shelter operations",
+      "sector": "",
+      "community": "Red Hook",
+      "top_n": 3
+    },
+    "output": "[\n  {\n    \"community\": \"Red Hook\",\n    \"project_title\": \"Floodproof Community Center Shelter\",\n    \"sector\": \"Emergency Management\",\n    \"issue\": \"Shelter operations fail when ground-floor equipment floods.\",\n    \"action\": \"Elevate electrical systems and retrofit the community center so it can operate as a storm shelter.\",\n    \"priority\": \"High\",\n    \"source_note\": \"Inspired by neighborhood resilience hub concepts in the course materials.\",\n    \"score\": 7\n  },\n  {\n    \"community\": \"Red Hook\",\n    \"project_title\": \"Neighborhood Microgrid for Public Housing\",\n    \"sector\": \"Energy\",\n    \"issue\": \"Residents lose heat, elevators, and refrigeration during outages.\",\n    \"action\": \"Install a neighborhood microgrid with solar, batteries, and backup connections for public housing buildings.\",\n    \"priority\": \"High\",\n    \"source_note\": \"Inspired by coastal recovery planning examples in the course materials.\",\n    \"score\": 5\n  }\n]"
+  },
+  {
+    "name": "search_recovery_projects",
+    "arguments": {
+      "query": "backup power",
+      "sector": "",
+      "community": "Red Hook",
+      "top_n": 3
+    },
+    "output": "[\n  {\n    \"community\": \"Red Hook\",\n    \"project_title\": \"Neighborhood Microgrid for Public Housing\",\n    \"sector\": \"Energy\",\n    \"issue\": \"Residents lose heat, elevators, and refrigeration during outages.\",\n    \"action\": \"Install a neighborhood microgrid with solar, batteries, and backup connections for public housing buildings.\",\n    \"priority\": \"High\",\n    \"source_note\": \"Inspired by coastal recovery planning examples in the course materials.\",\n    \"score\": 6\n  },\n  {\n    \"community\": \"Red Hook\",\n    \"project_title\": \"Floodproof Community Center Shelter\",\n    \"sector\": \"Emergency Management\",\n    \"issue\": \"Shelter operations fail when ground-floor equipment floods.\",\n    \"action\": \"Elevate electrical systems and retrofit the community center so it can operate as a storm shelter.\",\n    \"priority\": \"High\",\n    \"source_note\": \"Inspired by neighborhood resilience hub concepts in the course materials.\",\n    \"score\": 5\n  }\n]"
+  }
+]
+
+Agent output:
+- **Neighborhood Microgrid for Public Housing**: This project aims to install a microgrid system with solar, batteries, and backup connections for public housing buildings. It addresses the issue of residents losing heat, elevators, and refrigeration during outages.
+- **Floodproof Community Center Shelter**: The goal of this project is to elevate electrical systems and retrofit the community center so it can operate as a storm shelter when ground-floor equipment floods.

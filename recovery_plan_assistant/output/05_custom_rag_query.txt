@@ -1,0 +1,51 @@
+CUSTOM RAG QUERY
+
+Search query:
+evacuation access flood barriers transit
+
+Retrieved records:
+[
+  {
+    "community": "Long Beach",
+    "project_title": "Transit Entrance Flood Barriers",
+    "sector": "Transportation",
+    "issue": "Rail and bus access is disrupted by surge water entering stations and access points.",
+    "action": "Install removable flood barriers and pump upgrades at transit entrances.",
+    "priority": "Medium",
+    "source_note": "Inspired by transit resilience examples in the course materials.",
+    "score": 7
+  },
+  {
+    "community": "Lower Manhattan",
+    "project_title": "Subway Vent Flood Gates",
+    "sector": "Transportation",
+    "issue": "Underground transit assets flood through vents and stairways during major storms.",
+    "action": "Add deployable flood gates, raised vents, and monitoring sensors at key subway openings.",
+    "priority": "High",
+    "source_note": "Inspired by Lower Manhattan recovery planning themes.",
+    "score": 6
+  },
+  {
+    "community": "Broad Channel",
+    "project_title": "Emergency Ferry Staging Area",
+    "sector": "Transportation",
+    "issue": "Road access can be cut off during severe flooding.",
+    "action": "Designate and equip a ferry staging area for emergency passenger and supply transport.",
+    "priority": "Medium",
+    "source_note": "Inspired by coastal access planning examples in the course materials.",
+    "score": 4
+  }
+]
+
+Generated answer:
+# Relevant Transportation Recovery Projects for Evacuation Access and Flood Barriers
+
+In response to transportation-focused recovery needs, several projects have been identified as particularly relevant. These projects aim to enhance evacuation access and mitigate flood risks through various measures.
+
+- **Transit Entrance Flood Barriers (Long Beach)**: This project involves installing removable flood barriers and pump upgrades at transit entrances in Long Beach. The goal is to ensure rail and bus access remains uninterrupted during surge water events, aligning with the need for resilient infrastructure.
+  
+- **Subway Vent Flood Gates (Lower Manhattan)**: In Lower Manhattan, deploying deployable flood gates, raised vents, and monitoring sensors at subway openings aims to protect underground transit assets from flooding. This project is crucial given the area's history of severe storm impacts.
+
+- **Emergency Ferry Staging Area (Broad Channel)**: For Broad Channel, establishing a designated ferry staging area equipped for emergency passenger and supply transport addresses road access issues during severe flooding events. This ensures that evacuation routes remain viable even when roads are impassable.
+
+These projects collectively address critical transportation vulnerabilities by implementing preventive measures such as flood barriers and staging areas, thereby enhancing evacuation capabilities and reducing flood risks in affected communities.
