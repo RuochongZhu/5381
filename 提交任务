@@ -1,0 +1,66 @@
+LAB
+
+Build an AI Text Quality Control System
+
+🕒 Estimated Time: 30-45 minutes
+
+📋 Lab Overview
+
+Create an AI-powered text quality control system that automatically evaluates AI-generated reports on multiple quality criteria. Design quality control prompts, implement quality control functions using Ollama or OpenAI, and iterate to improve quality control accuracy. This lab teaches you to automate quality control for AI-generated content.
+
+✅ Your Tasks
+
+Task 1: Set Up AI Quality Control Prompt
+
+ Open 02_ai_quality_control.R and review the quality control prompt structure
+ Understand the quality control criteria from the script:
+Boolean accuracy check (TRUE/FALSE)
+Likert scales (1-5) for: accuracy, formality, faithfulness, clarity, succinctness, relevance
+ Review how the prompt is structured to request JSON output
+ Note how source data can be included for accuracy checking
+Task 2: Implement Quality Control Function
+
+ Choose your AI provider: Ollama (local) or OpenAI (cloud)
+ Set the AI_PROVIDER variable in the script to "ollama" or "openai"
+If using OpenAI, ensure your API key is set in your .env file (see ACTIVITY_openai_api_key.md)
+If using Ollama, ensure Ollama is running locally (see ACTIVITY_ollama_local.md)
+ Review the query_ai_quality_control() function to understand how it queries the AI
+ Review the parse_quality_control_results() function to understand how JSON responses are parsed
+Task 3: Run Quality Control and Compare Results
+
+ Run 02_ai_quality_control.R to check the sample report
+ Review the quality control results: check the boolean accuracy, Likert scale scores, and overall quality score
+ Compare AI quality control results with manual quality control from 01_manual_quality_control.R
+See any differences between manual and AI quality control approaches?
+Task 4: Iterate on Quality Control Prompts
+////
+
+✅ Your Task
+Learn to use t-test and ANOVA to compare quality control scores across different prompts. This activity teaches you statistical hypothesis testing skills needed for Homework 3, where you'll design your own experiment comparing prompt performance.
+
+🧱 Stage 1: Load and Explore Quality Control Scores
+Open 03_statistical_comparison.R or 03_statistical_comparison.py in your IDE
+Review the script structure and comments to understand the statistical approach
+Run the script to load the quality control scores from data/prompt_comparison_scores.csv
+Observe the summary statistics by prompt: which prompt has the highest mean overall score?
+Note the differences in means and standard deviations between prompts
+🧱 Stage 2: Perform T-Test to Compare Two Prompts
+Review how Bartlett's test checks for equal variances
+Understand the t-test comparing Prompt A vs Prompt B
+Run the script and view the t-test results
+Interpret the p-value: is the difference between Prompt A and Prompt B statistically significant?
+🧱 Stage 3: Perform ANOVA to Compare All Three Prompts
+Review how ANOVA compares all three prompts simultaneously
+Understand the difference between standard ANOVA and Welch's ANOVA (for unequal variances)
+Run the script and view the ANOVA results
+Interpret the F-statistic and p-value: do prompts differ significantly?
+🧱 Stage 4: Interpret Results and Explore Quality Dimensions
+Review the interpretation sections in the script output
+Examine the formality and succinctness comparisons
+Understand what the statistical tests tell us about prompt performance
+Note how statistical significance differs from practical significance
+📤 To Submit
+For credit: Submit a screenshot showing:
+The t-test results (comparing Prompt A vs Prompt B)
+The ANOVA results (comparing all three prompts)
+The interpretation output showing whether differences are statistically significant

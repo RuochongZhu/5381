@@ -1,0 +1,67 @@
+📊 T-Test: Prompt A vs Prompt B
+   Mean A:  4.17 
+   Mean B:  3.67 
+   Difference:  0.5 
+
+📋 T-Test Results (tidy format):
+# A tibble: 1 × 10
+  estimate estimate1 estimate2 statistic  p.value parameter conf.low conf.high
+     <dbl>     <dbl>     <dbl>     <dbl>    <dbl>     <dbl>    <dbl>     <dbl>
+1    0.500      4.17      3.67      14.1 1.95e-20        58    0.429     0.571
+# ℹ 2 more variables: method <chr>, alternative <chr>
+
+💡 Interpretation:
+   ✅ The difference between Prompt A and Prompt B is statistically significant.
+   ✅ Prompt  A  performs significantly better (p =  0 ).
+
+📊 ANOVA: Comparing All Three Prompts (A, B, C)
+
+	One-way analysis of means
+
+data:  overall_score and prompt_id
+F = 188.42, num df = 2, denom df = 87, p-value < 2.2e-16
+
+
+📋 ANOVA Results (tidy format):
+# A tibble: 1 × 5
+  num.df den.df statistic  p.value method                   
+   <dbl>  <dbl>     <dbl>    <dbl> <chr>                    
+1      2     87      188. 2.41e-32 One-way analysis of means
+
+📊 F-statistic:  188.4246 
+📊 p-value:  0 
+
+💡 Interpretation:
+   ✅ At least one prompt performs significantly differently from the others.
+   ✅ The F-statistic ( 188.4246 ) is significant (p =  0 ).
+   ✅ We can conclude that prompt choice significantly affects quality control scores.
+
+📊 Formality Scores by Prompt:
+# A tibble: 3 × 3
+  prompt_id mean_formality sd_formality
+  <chr>              <dbl>        <dbl>
+1 A                   4.83        0.379
+2 B                   2.83        0.379
+3 C                   1.83        0.379
+
+📋 Formality ANOVA Results:
+# A tibble: 1 × 5
+  num.df den.df statistic  p.value method                                       
+   <dbl>  <dbl>     <dbl>    <dbl> <chr>                                        
+1      2     58      482. 7.48e-37 One-way analysis of means (not assuming equa…
+
+📊 Succinctness Scores by Prompt:
+# A tibble: 3 × 3
+  prompt_id mean_succinctness sd_succinctness
+  <chr>                 <dbl>           <dbl>
+1 A                      2.93           0.254
+2 B                      5              0    
+3 C                      3              0    
+
+📋 Succinctness ANOVA Results:
+# A tibble: 1 × 5
+  num.df den.df statistic p.value method                                        
+   <dbl>  <dbl>     <dbl>   <dbl> <chr>                                         
+1      2    NaN       NaN     NaN One-way analysis of means (not assuming equal…
+
+✅ Statistical comparison complete!

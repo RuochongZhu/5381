@@ -1,0 +1,92 @@
+📝 Report for Quality Control:
+---
+In 2015, Light Trucks contributed 51.8% of PM10 emissions in White County, IL. Cars/Bikes accounted for 36.1% of total PM10 emissions in the area that year. Combo Trucks, Heavy Trucks, and Buses combined were responsible for only 12.1% of PM10 emissions. To lower PM10 emissions in White County, IL, focus should be on reducing emissions from Light Trucks and Cars/Bikes, as they collectively contribute to 87.9% of total emissions. Implementing stricter emission standards for these vehicles or promoting the use of electric vehicles could help significantly reduce pollution levels in the region.
+---
+
+🔧 Provider: ollama
+🔧 Model: qwen2.5:3b
+
+🤖 Querying AI for quality control (baseline prompt)...
+
+📥 AI Response (raw):
+{
+  "accurate": false,
+  "accuracy": 2,
+  "formality": 3,
+  "faithfulness": 4,
+  "clarity": 4,
+  "succinctness": 3,
+  "relevance": 5,
+  "details": "The report misinterprets the data by stating that Light Trucks and Cars/Bikes together contribute to 87.9% of total emissions, which is incorrect as their combined percentage is 77.9%. The rest of the information aligns with the provided data."
+}
+
+✅ Quality Control Results:
+# A tibble: 1 × 11
+  prompt_version model      accurate accuracy formality faithfulness clarity
+  <chr>          <chr>      <lgl>       <int>     <int>        <int>   <int>
+1 baseline       qwen2.5:3b FALSE           2         3            4       4
+  succinctness relevance
+         <int>     <int>
+1            3         5
+  details                                                                       
+  <chr>                                                                         
+1 The report misinterprets the data by stating that Light Trucks and Cars/Bikes…
+  overall_score
+          <dbl>
+1           3.5
+
+📊 Overall Quality Score (average of Likert scales): 3.5/ 5.0
+📊 Accuracy Check: ❌ FAIL
+
+🤖 Querying AI for quality control (enhanced prompt)...
+
+📥 AI Response (raw):
+{
+  "accurate": false,
+  "accuracy": 2,
+  "formality": 3,
+  "faithfulness": 2,
+  "clarity": 3,
+  "succinctness": 4,
+  "relevance": 5,
+  "details": "The report misinterprets the data by suggesting that Light Trucks and Cars/Bikes together contribute to 87.9% of total emissions, which is incorrect as their combined percentage is 77.9%. The recommendation for reducing emissions from these vehicles or promoting electric vehicles is not directly supported by the source data."
+}
+
+✅ Quality Control Results:
+# A tibble: 1 × 11
+  prompt_version model      accurate accuracy formality faithfulness clarity
+  <chr>          <chr>      <lgl>       <int>     <int>        <int>   <int>
+1 enhanced       qwen2.5:3b FALSE           2         3            2       3
+  succinctness relevance
+         <int>     <int>
+1            4         5
+  details                                                                       
+  <chr>                                                                         
+1 The report misinterprets the data by suggesting that Light Trucks and Cars/Bi…
+  overall_score
+          <dbl>
+1          3.17
+
+📊 Overall Quality Score (average of Likert scales): 3.17/ 5.0
+📊 Accuracy Check: ❌ FAIL
+
+📋 Prompt Comparison Summary:
+# A tibble: 2 × 9
+  prompt_version accurate accuracy formality faithfulness clarity succinctness
+  <chr>          <lgl>       <int>     <int>        <int>   <int>        <int>
+1 baseline       FALSE           2         3            4       4            3
+2 enhanced       FALSE           2         3            2       3            4
+  relevance overall_score
+      <int>         <dbl>
+1         5          3.5 
+2         5          3.17
+
+📋 Manual Quality Summary Reference:
+# A tibble: 1 × 5
+  has_numbers has_percentages has_recommendations has_contractions has_hyperbole
+  <lgl>       <lgl>           <lgl>               <lgl>            <lgl>        
+1 TRUE        TRUE            TRUE                FALSE            FALSE        
+
+✅ AI quality control complete!
+💾 Saved CSV results to 09_text_analysis/results/ai_quality_control_prompt_comparison.csv
+💾 Saved submission notes to 09_text_analysis/results/ai_quality_control_submission_notes.md
